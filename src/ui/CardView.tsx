@@ -32,7 +32,7 @@ export function CardView({ card, as }: Props) {
           <b>{card.rank}</b>
           <i>{SUIT_GLYPH[card.suit]}</i>
         </span>
-        <Art kind={card.suit} />
+        <Art card={card} />
         <span className="card__name">{t(`suit.${card.suit}`)}</span>
       </div>
     );
@@ -42,7 +42,7 @@ export function CardView({ card, as }: Props) {
       <span className="card__corner">
         <i>{SPECIAL_GLYPH[card.kind]}</i>
       </span>
-      <Art kind={card.kind} />
+      <Art card={card} />
       {as ? (
         <span className="card__name card__name--mode" data-testid="card-mode">
           <i>{SPECIAL_GLYPH[as]}</i> {t(`card.${as}`)}
@@ -57,7 +57,7 @@ export function CardView({ card, as }: Props) {
 export function CardBack() {
   return (
     <div className="card card--back" aria-hidden="true">
-      <Art kind="back" />
+      <Art card="back" />
     </div>
   );
 }

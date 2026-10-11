@@ -5,3 +5,4 @@ supabase/functions/room/index.ts
 *.local
 supabase/.temp
 .mcp.json
+art

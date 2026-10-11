@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "e2e": "node e2e/play.mjs desktop && node e2e/play.mjs mobile 5 master 11 && node e2e/checks.mjs && node e2e/online.mjs",
     "build:fn": "rolldown src/net/edge.ts --file supabase/functions/room/index.ts --format esm",
-    "deploy:fn": "npm run build:fn && npx supabase functions deploy room"
+    "deploy:fn": "npm run build:fn && npx supabase functions deploy room",
+    "art": "scripts/art.sh"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",

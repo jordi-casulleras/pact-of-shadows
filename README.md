@@ -22,7 +22,8 @@ Juego de bazas con apuesta exacta, ambientado en ninjas, para navegador. Un juga
 - `src/net/`: multijugador. Lógica de salas del servidor (`room.ts`, `handler.ts`, `store.ts`), su entrada como Edge Function (`edge.ts`) y cliente del navegador (`client.ts`).
 - `supabase/`: la migración de la tabla `rooms` y la configuración de la función `room`. `supabase/functions/room/index.ts` se genera con `npm run build:fn` y no se versiona.
 - `src/i18n/`: textos en español e inglés.
-- `src/ui/`: interfaz en React. Las ilustraciones de las cartas son SVG en `src/ui/Art.tsx`.
+- `src/ui/`: interfaz en React.
+- `src/assets/`: ilustraciones de las cartas y del tablero, en WebP. Se generan con `npm run art` (necesita `ffmpeg` y `cwebp`) a partir de los originales de `art/`, que no se versionan. Una carta especial busca `master-3.webp`, luego `master.webp`, así que cada copia puede tener su propia imagen o compartirla.
 - `e2e/`: pruebas en navegador con Playwright.
 
 Parámetros de URL para pruebas: `?seed=123` fija el reparto, `?speed=6` acorta las esperas `?gallery=1` muestra todas las cartas y `?rounds=2` acorta las partidas online.

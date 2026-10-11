@@ -317,12 +317,21 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.22), transparent 40%, rgba(0, 0, 0, 0.35));
+  z-index: 1;
+  /* A dark corner behind the rank so it reads on any picture, and a faint sheen across the card. */
+  background:
+    radial-gradient(circle at 0 0, rgba(0, 0, 0, 0.75), transparent 46%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.14), transparent 35%);
   pointer-events: none;
+}
+
+.card--back::before {
+  background: none;
 }
 
 .card__corner {
   position: absolute;
+  z-index: 2;
   top: 0.25em;
   left: 0.35em;
   display: flex;
@@ -334,74 +343,48 @@ button {
 .card__corner b {
   font-size: 1.7em;
   font-weight: 800;
-  text-shadow: 0 0.06em 0 rgba(0, 0, 0, 0.6);
+  text-shadow:
+    0 0.06em 0 rgba(0, 0, 0, 0.8),
+    0 0 0.3em rgba(0, 0, 0, 0.9);
 }
 
 .card__corner i {
   font-size: 0.95em;
   font-style: normal;
-  opacity: 0.9;
+  text-shadow: 0 0 0.3em rgba(0, 0, 0, 0.9);
 }
 
+/* The illustration fills the card; the rank, emblem and name are laid over it. */
 .art {
   position: absolute;
-  left: 10%;
-  top: 16%;
-  width: 80%;
-  height: auto;
-  fill: currentColor;
-  color: var(--art, var(--paper));
-  filter: drop-shadow(0 0.08em 0.1em rgba(0, 0, 0, 0.55));
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   pointer-events: none;
-}
-
-.card--number .art {
-  left: 17%;
-  top: 23%;
-  width: 68%;
-}
-
-.art-accent {
-  fill: var(--art-accent, var(--gold-bright));
-}
-
-.art-dark {
-  fill: var(--art-dark, #17120f);
-}
-
-.art-light {
-  fill: var(--art-light, var(--paper));
-}
-
-.art [fill='none'] {
-  fill: none;
-}
-
-.art-accent[fill='none'] {
-  stroke: var(--art-accent, var(--gold-bright));
-}
-
-.art-dark[fill='none'] {
-  stroke: var(--art-dark, #17120f);
-}
-
-.art-light[fill='none'] {
-  stroke: var(--art-light, var(--paper));
+  user-select: none;
 }
 
 .card__name {
   position: absolute;
+  z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;
   padding: 0.3em 0.2em;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.62);
   font-size: 0.72em;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.02em;
+}
+
+/* The longest name of all: a touch smaller so it is not cut short. */
+.card--smokeBomb .card__name:not(.card__name--mode) {
+  font-size: 0.6em;
+  letter-spacing: 0;
 }
 
 .card__name--mode {
@@ -420,26 +403,18 @@ button {
 
 .card--fire {
   --face: radial-gradient(circle at 50% 40%, #e0604a, #8e2a1e 75%);
-  --art: #ffd9a0;
-  --art-accent: #fff3c4;
 }
 
 .card--water {
   --face: radial-gradient(circle at 50% 40%, #4c9bd1, #1f5479 75%);
-  --art: #d6efff;
-  --art-accent: #1f5479;
 }
 
 .card--forest {
   --face: radial-gradient(circle at 50% 40%, #4bb06d, #215a35 75%);
-  --art: #d9f5c8;
-  --art-accent: #215a35;
-  --art-dark: #3d2a16;
 }
 
 .card--shadow {
   --face: radial-gradient(circle at 50% 40%, #4d4666, #17151e 75%);
-  --art: #cfc6ff;
   border-color: #8f7fd0;
 }
 
@@ -457,48 +432,27 @@ button {
 
 .card--smokeBomb {
   --face: radial-gradient(circle at 50% 40%, #9a9fa8, #474a51 75%);
-  --art: #e9a13b;
 }
 
 .card--master {
   --face: radial-gradient(circle at 50% 40%, #46548f, #151a33 75%);
-  --art: #b83a2b;
-  --art-dark: #0f1226;
-  --art-light: #e8c9a0;
 }
 
 .card--geisha {
   --face: radial-gradient(circle at 50% 40%, #d977a0, #6e2647 75%);
-  --art: #fbe9ef;
-  --art-accent: #b83a2b;
-  --art-light: #f29bb8;
-  --art-dark: #6e2647;
 }
 
 .card--shogun {
   --face: radial-gradient(circle at 50% 40%, #e0bb55, #5c3d0c 75%);
-  --art: #8e2a1e;
-  --art-dark: #2a1c0c;
-  --art-accent: #fff3c4;
 }
 
 .card--kitsune {
   --face: radial-gradient(circle at 50% 40%, #f09a45, #7d3a0d 75%);
-  --art: #b83a2b;
-  --art-dark: #2a1c0c;
-  --art-light: #fff6e6;
 }
 
 .card--back {
-  --face: repeating-linear-gradient(45deg, #5c1f18 0 0.5em, #4a1711 0.5em 1em);
+  --face: #1b1830;
   border-color: var(--gold);
-}
-
-.card--back .art {
-  left: 12%;
-  top: 23%;
-  width: 76%;
-  color: var(--gold);
 }
 
 /* ---------- Table ---------- */
@@ -511,11 +465,22 @@ button {
   row-gap: 0.15rem;
   grid-template-columns: minmax(0, 1fr);
   padding: max(0.4rem, env(safe-area-inset-top)) 0.6rem max(0.4rem, env(safe-area-inset-bottom));
+  /* The painted board, dimmed a little so cards and text stand out on it. */
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(92, 122, 84, 0.5), transparent 62%),
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.14) 0 2px, transparent 2px 46px),
-    linear-gradient(#3a2a1f, #1c1410);
+    linear-gradient(rgba(12, 9, 7, 0.28), rgba(12, 9, 7, 0.28)),
+    url('../assets/board-desktop.webp') center / cover no-repeat,
+    #1c1410;
   overflow: hidden;
+}
+
+@media (orientation: portrait) {
+  .table {
+    /* The upright board is painted darker, so it needs less dimming. */
+    background:
+      linear-gradient(rgba(12, 9, 7, 0.1), rgba(12, 9, 7, 0.1)),
+      url('../assets/board-mobile.webp') center / cover no-repeat,
+      #1c1410;
+  }
 }
 
 .hud {
@@ -1195,7 +1160,7 @@ button {
   translate: 50% 0;
 }
 
-/* ---------- Tutorial, settings, lanterns ---------- */
+/* ---------- Tutorial, settings ---------- */
 
 .tip {
   padding: 0.6rem 0.8rem;
@@ -1293,62 +1258,6 @@ button {
   font-size: 0.7em;
   font-weight: 400;
   opacity: 0.8;
-}
-
-.lantern {
-  position: absolute;
-  top: 34%;
-  width: 3.2rem;
-  height: 4.6rem;
-  border-radius: 45% / 22%;
-  border: 2px solid #2a1c0c;
-  background:
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 2px, transparent 2px 10px),
-    radial-gradient(circle at 50% 55%, #ffd27a, #c8572c 70%, #7d2a16);
-  box-shadow: 0 0 30px 6px rgba(255, 170, 80, 0.25);
-  opacity: 0.75;
-  transition:
-    box-shadow 0.4s,
-    opacity 0.4s;
-  pointer-events: none;
-}
-
-.lantern::before,
-.lantern::after {
-  content: '';
-  position: absolute;
-  left: 22%;
-  width: 56%;
-  height: 0.5rem;
-  border-radius: 3px;
-  background: #1a1410;
-}
-
-.lantern::before {
-  top: -0.35rem;
-}
-
-.lantern::after {
-  bottom: -0.35rem;
-}
-
-.lantern--left {
-  left: 2.2rem;
-}
-
-.lantern--right {
-  right: 2.2rem;
-}
-
-.lantern.is-lit {
-  opacity: 1;
-  box-shadow: 0 0 60px 22px rgba(255, 190, 100, 0.55);
-}
-
-@media (max-width: 900px) {
-  .lantern {
-    display: none;
-  }
 }
 
 .gallery {

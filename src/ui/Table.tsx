@@ -203,9 +203,6 @@ export function Table({
         </span>
       </header>
 
-      <div className={`lantern lantern--left${trickPause ? ' is-lit' : ''}`} aria-hidden="true" />
-      <div className={`lantern lantern--right${trickPause ? ' is-lit' : ''}`} aria-hidden="true" />
-
       <div className="opponents">
         {rivals.map((p, i) => {
           const name = names[p];
