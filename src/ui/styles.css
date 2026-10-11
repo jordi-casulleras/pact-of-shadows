@@ -580,6 +580,25 @@ button {
   box-shadow: 0 0 22px rgba(127, 207, 138, 0.6);
 }
 
+.lead-tag {
+  padding: 0.05em 0.5em;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #2a1c0c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.seat .lead-tag {
+  position: absolute;
+  top: -0.45rem;
+  right: -0.2rem;
+  z-index: 1;
+}
+
 .avatar {
   display: grid;
   place-items: center;
@@ -906,6 +925,15 @@ button {
 .bid p {
   color: var(--paper-dim);
   font-size: 0.9rem;
+}
+
+.bid .bid__lead {
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.bid .bid__lead.is-me {
+  color: var(--gold-bright);
 }
 
 /* One row when it fits; on narrow screens two rows, with a shorter last row centred under the first. */

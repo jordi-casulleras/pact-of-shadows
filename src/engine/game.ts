@@ -1,4 +1,5 @@
 import { DECK_SIZE, deal } from './deck.js';
+import { createRng } from './rng.js';
 import { scoreRound } from './scoring.js';
 import { legalCards, resolveTrick } from './trick.js';
 import {
@@ -45,6 +46,13 @@ function startRound(config: GameConfig, round: number, scores: number[], history
     history,
   };
 }
+
+/**
+ * Who opens round 1 when it is left to chance. Drawn from the game's seed, so the same seed
+ * always gives the same game.
+ */
+export const randomFirstPlayer = (seed: number, playerCount: number): number =>
+  Math.floor(createRng(seed ^ 0x1ead)() * playerCount);
 
 export function createGame(options: NewGameOptions): StepResult {
   const config: GameConfig = {

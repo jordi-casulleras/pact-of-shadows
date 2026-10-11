@@ -63,6 +63,8 @@ export const es = {
   'seat.pact': 'Bazas ganadas / pactadas',
   'seat.pactHidden': 'Pacto todavía oculto',
   'seat.score': 'Puntuación',
+  'seat.leads': 'Abre',
+  'seat.leadsMe': 'Abres tú',
   'seat.points': '{points} pts',
   'hud.tricks': 'Bazas',
   'hud.points': 'Puntos',
@@ -110,6 +112,8 @@ export const es = {
 
   'bid.title': '¿Cuántas bazas vas a ganar?',
   'bid.hint': 'Solo puntúas si ganas exactamente las que pactes.',
+  'bid.lead': 'Abre {name} la primera baza.',
+  'bid.leadMe': 'Abres tú la primera baza.',
   'bid.revealed': 'Pactos revelados',
 
   'kitsune.title': 'La Kitsune cambia de forma',

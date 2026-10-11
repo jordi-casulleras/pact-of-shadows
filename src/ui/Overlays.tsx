@@ -28,13 +28,15 @@ function Modal({ children, className = '', testId }: { children: ReactNode; clas
 /** Sits above the hand without covering it: the player needs to see their cards to bid. */
 interface BidProps {
   round: number;
+  /** Who opens the round's first trick; null when it is this player. */
+  leader: string | null;
   onBid: (bid: number) => void;
   /** First-game hint shown in place of the usual one-liner. */
   tip?: string;
   onSkipTutorial?: () => void;
 }
 
-export function BidPanel({ round, onBid, tip, onSkipTutorial }: BidProps) {
+export function BidPanel({ round, leader, onBid, tip, onSkipTutorial }: BidProps) {
   const { t } = useI18n();
   return (
     <motion.div
@@ -51,6 +53,9 @@ export function BidPanel({ round, onBid, tip, onSkipTutorial }: BidProps) {
       ) : (
         <p>{t('bid.hint')}</p>
       )}
+      <p className={`bid__lead${leader === null ? ' is-me' : ''}`} data-testid="bid-lead">
+        {leader === null ? t('bid.leadMe') : t('bid.lead', { name: leader })}
+      </p>
       <div
         className="bid__options"
         style={{ '--n': round + 1, '--half': round + 1 > 6 ? Math.ceil((round + 1) / 2) : round + 1 } as CSSProperties}

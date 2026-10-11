@@ -9,6 +9,7 @@ import {
   createGame,
   createRng,
   legalPlays,
+  randomFirstPlayer,
   playerView,
   type GameState,
   type KitsuneMode,
@@ -35,7 +36,13 @@ interface Options {
 
 export function useGame(settings: Settings, { initial, held = false }: Options = {}) {
   const [game, setGame] = useState<GameState>(
-    () => initial ?? createGame({ playerCount: settings.bots + 1, seed: settings.seed }).state,
+    () =>
+      initial ??
+      createGame({
+        playerCount: settings.bots + 1,
+        seed: settings.seed,
+        firstPlayer: randomFirstPlayer(settings.seed, settings.bots + 1),
+      }).state,
   );
   const [pause, setPause] = useState<Pause | null>(null);
   // Resumed games get a fresh stream so bots do not replay the same choices.

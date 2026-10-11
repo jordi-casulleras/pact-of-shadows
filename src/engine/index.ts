@@ -7,6 +7,7 @@ export {
   createGame,
   legalBids,
   legalPlays,
+  randomFirstPlayer,
   winners,
   DEFAULT_ROUNDS,
   MAX_PLAYERS,

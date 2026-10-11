@@ -5,6 +5,7 @@ import {
   createRng,
   EngineError,
   playerView,
+  randomFirstPlayer,
   type GameState,
   type KitsuneMode,
 } from '../engine/index.js';
@@ -160,7 +161,12 @@ export function start(room: Room, token: string, now: number): void {
   requireHost(room, token);
   requireLobby(room);
   if (room.seats.length < MIN_SEATS) throw new RoomError('tooFewPlayers');
-  room.game = createGame({ playerCount: room.seats.length, seed: room.seed, rounds: room.rounds }).state;
+  room.game = createGame({
+    playerCount: room.seats.length,
+    seed: room.seed,
+    rounds: room.rounds,
+    firstPlayer: randomFirstPlayer(room.seed, room.seats.length),
+  }).state;
   room.status = 'playing';
   room.ready = room.seats.map(() => false);
   room.holdUntil = 0;

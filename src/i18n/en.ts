@@ -65,6 +65,8 @@ export const en: Dict = {
   'seat.pact': 'Tricks won / pledged',
   'seat.pactHidden': 'Pact still hidden',
   'seat.score': 'Score',
+  'seat.leads': 'Leads',
+  'seat.leadsMe': 'You lead',
   'seat.points': '{points} pts',
   'hud.tricks': 'Tricks',
   'hud.points': 'Points',
@@ -112,6 +114,8 @@ export const en: Dict = {
 
   'bid.title': 'How many tricks will you win?',
   'bid.hint': 'You only score if you win exactly the number you pledge.',
+  'bid.lead': '{name} leads the first trick.',
+  'bid.leadMe': 'You lead the first trick.',
   'bid.revealed': 'Pacts revealed',
 
   'kitsune.title': 'The Kitsune shifts shape',

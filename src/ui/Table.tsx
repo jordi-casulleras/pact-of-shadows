@@ -135,6 +135,8 @@ export function Table({
   const hand = useMemo(() => view.hand.slice().sort((a, b) => sortKey(a) - sortKey(b)), [view.hand]);
   const myTurn = !pause && game.phase === 'playing' && game.currentPlayer === me;
   const bidsVisible = game.phase !== 'bidding';
+  /** Who opens the round matters until its first trick is over; after that the tag is put away. */
+  const opening = (game.phase === 'bidding' || game.phase === 'playing') && game.completedTricks.length === 0;
 
   const requestPlay = (card: Card) => {
     if (!legalIds.has(card.id)) return;
@@ -212,6 +214,7 @@ export function Table({
           const active = !pause && game.phase === 'playing' && game.currentPlayer === p;
           const won = trickPause?.result.winner === p;
           const pactKnown = bidsVisible && bid !== null;
+          const opens = opening && game.startingPlayer === p;
           return (
             <button
               key={p}
@@ -225,6 +228,11 @@ export function Table({
             >
               <div className={`avatar avatar--${i + 1}`}>{name[0]?.toUpperCase()}</div>
               <div className="seat__name">{name}</div>
+              {opens && (
+                <div className="lead-tag" data-testid="lead-tag">
+                  {t('seat.leads')}
+                </div>
+              )}
               {away && <div className="seat__away">{t('online.away')}</div>}
               <div className="seat__chips">
                 <span className="chip" title={t('seat.cards')}>
@@ -387,6 +395,11 @@ export function Table({
           seatRefs.current[me] = el;
         }}
       >
+        {opening && game.startingPlayer === me && (
+          <span className="lead-tag" data-testid="lead-tag">
+            {t('seat.leadsMe')}
+          </span>
+        )}
         <span className={`stat pact pact--${pactState}`} data-testid="pact">
           <small>{t('hud.pact')}</small>
           <b>
@@ -407,6 +420,7 @@ export function Table({
       {game.phase === 'bidding' && myBid === null && (
         <BidPanel
           round={game.round}
+          leader={game.startingPlayer === me ? null : names[game.startingPlayer]}
           onBid={onBid}
           tip={tip === 'bid1' || tip === 'bid2' || tip === 'bid3' ? t(`tutorial.${tip}`) : undefined}
           onSkipTutorial={tutorial?.end}
