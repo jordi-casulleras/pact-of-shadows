@@ -144,11 +144,11 @@ export const en: Dict = {
 
   'round.title': 'End of round {round}',
   'round.player': 'Player',
-  'round.pact': 'Pact',
-  'round.tricks': 'Tricks',
-  'round.bonus': 'Bonus',
   'round.points': 'Points',
   'round.total': 'Total',
+  'round.made': 'Tricks / pact',
+  'round.madeOf': '{won} of {bid}',
+  'round.withBonus': 'bonus +{bonus}',
   'round.next': 'Next round',
   'round.finish': 'See result',
 

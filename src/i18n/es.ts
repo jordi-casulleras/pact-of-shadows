@@ -142,11 +142,11 @@ export const es = {
 
   'round.title': 'Fin de la ronda {round}',
   'round.player': 'Jugador',
-  'round.pact': 'Pacto',
-  'round.tricks': 'Bazas',
-  'round.bonus': 'Bonus',
   'round.points': 'Puntos',
   'round.total': 'Total',
+  'round.made': 'Bazas / pacto',
+  'round.madeOf': '{won} de {bid}',
+  'round.withBonus': 'bonus +{bonus}',
   'round.next': 'Siguiente ronda',
   'round.finish': 'Ver resultado',
 

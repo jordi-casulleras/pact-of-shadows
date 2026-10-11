@@ -7,8 +7,9 @@ import { App } from './ui/App';
 import './ui/styles.css';
 
 // Browsers only allow sound after a user gesture.
-window.addEventListener('pointerdown', unlockAudio);
-window.addEventListener('keydown', unlockAudio);
+for (const gesture of ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown']) {
+  window.addEventListener(gesture, unlockAudio);
+}
 
 // Lets automated checks confirm that sound is actually running.
 if (import.meta.env.DEV) Object.assign(window, { __audioState: audioState });

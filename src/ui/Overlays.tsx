@@ -128,13 +128,11 @@ export function RoundEnd({ result, scores, names, me, last, onNext, tip, waiting
         </p>
       )}
       <div className="scroll-x">
-        <table className="scores">
+        <table className="scores scores--round">
           <thead>
             <tr>
               <th>{t('round.player')}</th>
-              <th>{t('round.pact')}</th>
-              <th>{t('round.tricks')}</th>
-              <th>{t('round.bonus')}</th>
+              <th>{t('round.made')}</th>
               <th>{t('round.points')}</th>
               <th>{t('round.total')}</th>
             </tr>
@@ -145,10 +143,13 @@ export function RoundEnd({ result, scores, names, me, last, onNext, tip, waiting
               return (
                 <tr key={p} className={p === me ? 'is-me' : ''}>
                   <th>{name}</th>
-                  <td>{result.bids[p]}</td>
-                  <td className={made ? 'good' : 'bad'}>{result.tricksWon[p]}</td>
-                  <td>{result.bonus[p] > 0 ? signed(result.bonus[p]) : '—'}</td>
-                  <td className={result.delta[p] >= 0 ? 'good' : 'bad'}>{signed(result.delta[p])}</td>
+                  <td className={made ? 'good' : 'bad'}>
+                    {t('round.madeOf', { won: result.tricksWon[p], bid: result.bids[p] })}
+                  </td>
+                  <td className={result.delta[p] >= 0 ? 'good' : 'bad'}>
+                    {signed(result.delta[p])}
+                    {result.bonus[p] > 0 && <small>{t('round.withBonus', { bonus: result.bonus[p] })}</small>}
+                  </td>
                   <td>
                     <b>{scores[p]}</b>
                   </td>

@@ -193,7 +193,10 @@ export function configureAudio(options: { sfx: boolean; music: boolean }): void 
   syncMusic();
 }
 
-/** Call from a user gesture (pointer or key). Safe to call repeatedly. */
+/**
+ * Call from a user gesture. Safe to call repeatedly. On iOS the start of a touch does not count
+ * as one, only its end (touchend, pointerup, click), so it must be called from those too.
+ */
 export function unlockAudio(): void {
   if (!ctx) {
     const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -213,7 +216,8 @@ export function unlockAudio(): void {
       else void ctx?.resume();
     });
   }
-  if (ctx.state === 'suspended' && !document.hidden) void ctx.resume();
+  // Not only 'suspended': iOS leaves the context 'interrupted' after a call or a switch of app.
+  if (ctx.state !== 'running' && !document.hidden) void ctx.resume();
   syncMusic();
 }
 

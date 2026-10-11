@@ -1023,6 +1023,25 @@ button {
   font-size: 0.7em;
 }
 
+/* The round summary must fit a phone without scrolling: names give way, numbers do not. */
+.scores--round {
+  table-layout: auto;
+}
+
+/* The name column takes whatever the numbers leave, and its heading lines up with the names. */
+.scores--round th:first-child {
+  width: 100%;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.scores--round th:not(:first-child),
+.scores--round td {
+  padding-inline: 0.7em;
+}
+
 .scores .is-me {
   color: var(--gold-bright);
 }
