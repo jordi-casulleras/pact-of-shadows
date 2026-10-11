@@ -1,0 +1,7 @@
+node_modules
+dist
+e2e/shots
+supabase/functions/room/index.ts
+*.local
+supabase/.temp
+.mcp.json

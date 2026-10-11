@@ -1,0 +1,7 @@
+project_id = "pact-of-shadows"
+
+# Only signed-in (anonymous) users may call the function. The platform checks the token's
+# signature before the function runs; the function trusts that and only reads the user id,
+# so this must stay on.
+[functions.room]
+verify_jwt = true
